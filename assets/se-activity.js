@@ -1,6 +1,7 @@
 /* School Enterprises staff training: interactive activity engine (sort, sequence, branch). */
 (function(){
   'use strict';
+  try{ if(window.self!==window.top) document.documentElement.classList.add('embedded'); }catch(e){ document.documentElement.classList.add('embedded'); }
   var data = JSON.parse(document.getElementById('activity-data').textContent);
   var root = document.getElementById('app');
   var live = document.getElementById('live');

@@ -51,3 +51,4 @@ header.se h1{margin:2px 0 0;font-size:19px;line-height:1.25;font-weight:700;colo
 .btn.primary[disabled]{opacity:1}
 .btn.wrong,.btn.wrong[disabled]{border-color:var(--no);color:var(--no);background:var(--no-bg);opacity:1;text-decoration:line-through}
 header.se .k{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.embedded header.se{display:none}
