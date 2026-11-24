@@ -132,9 +132,68 @@
     show();
   }
 
+
+  /* CARDS: flip cards (tap to reveal the back) */
+  function runCards(card){
+    var cards=data.cards, seen={}, count=0;
+    card.innerHTML=''; intro(card);
+    var prog=el('div'); card.appendChild(prog);
+    var grid=el('div','cards'); card.appendChild(grid);
+    var foot=el('div'); foot.setAttribute('aria-live','polite'); card.appendChild(foot);
+    function upd(){ prog.innerHTML=''; prog.appendChild(progress(count,cards.length,data.label||'Cards turned over'));
+      if(count===cards.length && !foot.firstChild){ foot.appendChild(fb(true,'All cards turned.','You can turn them again, or finish.')); var f=el('button','btn primary','Finish'); f.type='button'; f.style.marginTop='12px'; f.onclick=function(){finish(card,0,0,null);}; foot.appendChild(f);} }
+    cards.forEach(function(c,k){
+      var b=el('button','flip'); b.type='button'; b.setAttribute('aria-pressed','false');
+      var inner=el('span','flip-inner');
+      var fr=el('span','face front'); if(c.tag) fr.appendChild(el('span','tag',c.tag)); fr.appendChild(el('span','ftext',c.front)); fr.appendChild(el('span','hint','Tap to turn over'));
+      var bk=el('span','face back'); bk.appendChild(el('span','bhead',c.front)); bk.appendChild(el('span','btext',c.back));
+      inner.appendChild(fr); inner.appendChild(bk); b.appendChild(inner);
+      b.setAttribute('aria-label',c.front+'. Tap to turn over.');
+      b.onclick=function(){ var on=b.classList.toggle('flipped'); b.setAttribute('aria-pressed',on?'true':'false');
+        b.setAttribute('aria-label',on?(c.front+'. '+c.back):(c.front+'. Tap to turn over.'));
+        if(on){ say(c.back); if(!seen[k]){seen[k]=1;count++;upd();} } };
+      grid.appendChild(b);
+    });
+    upd();
+  }
+
+  /* CHECKLIST: tick items as you go (saved on this device) */
+  function runChecklist(card){
+    var key='se-check:'+location.pathname, state={};
+    try{ state=JSON.parse(localStorage.getItem(key)||'{}'); }catch(e){}
+    var groups=data.groups||[{title:'',items:data.items}], total=0;
+    groups.forEach(function(g){ total+=g.items.length; });
+    card.innerHTML=''; intro(card);
+    var prog=el('div'); card.appendChild(prog);
+    var foot=el('div'); foot.setAttribute('aria-live','polite');
+    function count(){ var n=0; for(var k in state){ if(state[k]) n++; } return n; }
+    function upd(){ var n=count(); prog.innerHTML=''; prog.appendChild(progress(n,total,data.label||'Ticked'));
+      foot.innerHTML=''; if(n===total){ foot.appendChild(fb(true,'Checklist complete.',data.doneText||'Well done.')); var f=el('button','btn primary','Finish'); f.type='button'; f.style.marginTop='12px'; f.onclick=function(){finish(card,0,0,null);}; foot.appendChild(f);} }
+    var id=0;
+    groups.forEach(function(g){
+      if(g.title) card.appendChild(el('h3',null,g.title));
+      var ul=el('ul','checks');
+      g.items.forEach(function(it){
+        var k='i'+(id++); var li=el('li'); var cb=el('input'); cb.type='checkbox'; cb.id=k; cb.checked=!!state[k];
+        var lab=el('label',null,typeof it==='string'?it:it.text); lab.setAttribute('for',k);
+        cb.onchange=function(){ state[k]=cb.checked; try{localStorage.setItem(key,JSON.stringify(state));}catch(e){} li.classList.toggle('ticked',cb.checked); upd(); };
+        if(cb.checked) li.classList.add('ticked');
+        li.appendChild(cb); li.appendChild(lab);
+        if(it.why){ var w=el('span','why',it.why); li.appendChild(w); }
+        ul.appendChild(li);
+      });
+      card.appendChild(ul);
+    });
+    var clr=el('button','btn','Clear all ticks'); clr.type='button'; clr.style.marginTop='4px';
+    clr.onclick=function(){ state={}; try{localStorage.removeItem(key);}catch(e){} runChecklist(card); };
+    card.appendChild(clr); card.appendChild(foot);
+    if(data.note) card.appendChild(el('p','note',data.note));
+    upd();
+  }
+
   function start(){
     root.innerHTML=''; var card=el('div','card'); root.appendChild(card);
-    if(data.type==='sort') runSort(card); else if(data.type==='sequence') runSequence(card); else runBranch(card);
+    if(data.type==='sort') runSort(card); else if(data.type==='sequence') runSequence(card); else if(data.type==='cards') runCards(card); else if(data.type==='checklist') runChecklist(card); else runBranch(card);
   }
   start();
 })();

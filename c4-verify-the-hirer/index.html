@@ -5,7 +5,7 @@
 <title>Someone is not on the list | School Enterprises staff training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="../assets/se-activity.css?v=2">
+<link rel="stylesheet" href="../assets/se-activity.css?v=4">
 </head><body>
 <div class="wrap">
 <header class="se"><img src="../assets/se-logo-white.png" alt="School Enterprises"><div class="t"><p class="k">Interactive activity · Lettings duties: opening, locking up and on-shift practice</p><h1>Someone is not on the list</h1></div></header>
@@ -13,5 +13,5 @@
 <div id="live" class="sr" aria-live="polite"></div>
 </div>
 <script type="application/json" id="activity-data">{"type": "branch", "title": "Someone is not on the list", "intro": "Choose what you would do at each point.", "start": "n1", "nodes": {"n1": {"scene": "A person arrives and asks you to open the sports hall. They are not on the booking list and have no confirmation.", "short": "Did not open on a verbal claim", "choices": [{"text": "Politely explain that you cannot open an unlisted booking on a verbal claim, and that you will check with the agreed contact.", "ok": true, "next": "n2", "fb": "Be polite but firm, and follow the company process."}, {"text": "Open the hall. They seem genuine.", "ok": false, "fb": "Do not open on a verbal claim alone."}, {"text": "Open a classroom instead, as a gesture of goodwill.", "ok": false, "fb": "Do not open an unbooked classroom."}]}, "n2": {"scene": "While you are checking, they offer to pay you cash at the door so they can start now.", "ask": "What do you do?", "short": "Did not take cash at the door", "choices": [{"text": "Decline. Payment is handled by the office, and you carry on checking with the agreed contact.", "ok": true, "next": "n3", "fb": "Do not take cash to open an unlisted booking."}, {"text": "Take the cash and let them in. You can sort the paperwork later.", "ok": false, "fb": "Do not take cash to open an unlisted booking, whatever is offered."}]}, "n3": {"scene": "The agreed contact confirms the booking, and the group comes in.", "ask": "Which areas can they use?", "short": "Kept the group to the booked areas", "choices": [{"text": "Only the areas covered by their booking, plus the agreed access routes, toilets and changing rooms.", "ok": true, "next": "end", "fb": "Only open the booked areas."}, {"text": "Any space that looks empty.", "ok": false, "fb": "Empty does not mean booked."}, {"text": "The whole school, now that they have arrived.", "ok": false, "fb": "Only agreed areas may be used."}]}, "end": {"end": true}}, "outro": "Do not open an unlisted booking on a verbal claim alone. Check with the agreed contact and follow the company process."}</script>
-<script src="../assets/se-activity.js?v=2"></script>
+<script src="../assets/se-activity.js?v=4"></script>
 </body></html>
