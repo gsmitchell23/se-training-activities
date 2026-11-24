@@ -1,0 +1,53 @@
+:root{--teal:#005450;--teal-d:#004540;--ink:#1f2d2c;--light:#EAF6F5;--pale:#f7fbfb;--gold:#DDB871;--ok:#1d7a4a;--ok-bg:#e7f5ec;--no:#a5322b;--no-bg:#fbeceb;--line:#cfe3e1}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Nunito Sans',Nunito,Calibri,Arial,sans-serif;color:var(--ink);background:var(--pale);font-size:17px;line-height:1.55}
+h1,h2,h3,.btn,.tag{font-family:Manrope,'Nunito Sans',Arial,sans-serif}
+.wrap{max-width:46rem;margin:0 auto;padding:0 0 24px}
+header.se{background:var(--teal);color:#fff;padding:14px 18px 14px;border-bottom:3px solid var(--gold);display:flex;align-items:center;gap:14px}
+header.se img{height:34px;width:auto;flex:none}
+header.se .t{min-width:0}
+header.se .k{margin:0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700}
+header.se h1{margin:2px 0 0;font-size:19px;line-height:1.25;font-weight:700;color:#fff}
+.card{background:#fff;margin:14px 14px 0;border-radius:12px;padding:18px;box-shadow:0 1px 3px rgba(0,60,57,.12)}
+.intro{margin:0 0 12px}
+.progress{height:8px;background:var(--light);border-radius:6px;overflow:hidden;margin:4px 0 6px}
+.progress span{display:block;height:100%;width:0;background:var(--teal);transition:width .3s}
+.meta{font-size:14px;color:#4b5f5d;display:flex;justify-content:space-between;gap:8px;margin-bottom:10px}
+.item{border:2px solid var(--line);border-radius:10px;padding:14px;background:var(--pale);margin:0 0 12px}
+.item p.q{margin:0 0 12px;font-weight:700;font-size:18px}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.btn{appearance:none;border:2px solid var(--teal);background:#fff;color:var(--teal);font-weight:700;font-size:15px;padding:10px 14px;border-radius:999px;cursor:pointer;min-height:44px;text-align:left;line-height:1.3}
+.btn:hover{background:var(--light)}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.btn.primary{background:var(--teal);color:#fff}
+.btn.primary:hover{background:var(--teal-d)}
+.btn[disabled]{opacity:.55;cursor:default}
+.btn.block{display:block;width:100%;border-radius:10px;margin:0 0 8px;font-family:'Nunito Sans',Arial,sans-serif;font-weight:600;font-size:16px}
+.fb{border-radius:10px;padding:12px 14px;margin:12px 0 0;font-size:16px}
+.fb.ok{background:var(--ok-bg);border-left:5px solid var(--ok)}
+.fb.no{background:var(--no-bg);border-left:5px solid var(--no)}
+.fb strong{font-family:Manrope,Arial,sans-serif}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--light);color:var(--teal);margin-bottom:8px}
+.pool{display:flex;flex-direction:column;gap:8px}
+.seq{list-style:none;margin:0 0 12px;padding:0;counter-reset:s}
+.seq li{counter-increment:s;background:var(--light);border-radius:10px;padding:10px 12px 10px 48px;position:relative;margin:0 0 8px;font-weight:600}
+.seq li::before{content:counter(s);position:absolute;left:10px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;font:700 14px/28px Manrope,Arial,sans-serif;text-align:center}
+.seq:empty{display:none}
+.shake{animation:sh .35s}
+@keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.scene{background:var(--light);border-radius:10px;padding:14px;margin:0 0 14px}
+.scene p{margin:0}
+.done{text-align:center;padding:8px 4px}
+.done h2{color:var(--teal);margin:6px 0 8px;font-size:22px}
+.done .score{font:800 40px/1 Manrope,Arial,sans-serif;color:var(--teal);margin:6px 0}
+.badge{display:inline-block;width:56px;height:56px;border-radius:50%;background:var(--teal);color:var(--gold);font:800 28px/56px Manrope,Arial,sans-serif;border:3px solid var(--gold)}
+.summary{text-align:left;margin:14px 0 0;padding:0;list-style:none}
+.summary li{padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.note{font-size:14px;color:#4b5f5d;margin:12px 0 0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:480px){body{font-size:16px}.card{margin:10px 8px 0;padding:14px}header.se h1{font-size:17px}header.se img{height:28px}.btn{font-size:14px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.btn.primary[disabled]{opacity:1}
+.btn.wrong,.btn.wrong[disabled]{border-color:var(--no);color:var(--no);background:var(--no-bg);opacity:1;text-decoration:line-through}
+header.se .k{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
